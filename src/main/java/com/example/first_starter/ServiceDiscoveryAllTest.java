@@ -1,6 +1,7 @@
 package com.example.first_starter;
 
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.json.JsonObject;
@@ -103,16 +104,24 @@ public class ServiceDiscoveryAllTest extends AbstractVerticle {
 			}
 		});
 
-		JsonObject mongoConfig = new JsonObject().put("connection_string", "mongodb://localhost:27017").put("db_name",
-				"test");
+		JsonObject config = Vertx.currentContext().config();
+
+		String uri = config.getString("mongo_uri");
+		if (uri == null) {
+			uri = "mongodb://localhost:27017";
+		}
+		String db = config.getString("mongo_db");
+		if (db == null) {
+			db = "test";
+		}
+
+		JsonObject mongoConfig = new JsonObject().put("connection_string", uri).put("db_name", db);
 
 //		Record mongoRecord = MongoDataSource.createRecord("mongo-record",
 //				new JsonObject().put("connection_string", "mongodb://localhost:27017"),
 //				new JsonObject().put("database", "test"));
 
-		Record mongoRecord = MongoDataSource.createRecord("some-mongo-db",
-				new JsonObject().put("connection_string", "mongodb://localhost:27017/test"),
-				new JsonObject().put("database", "test"));
+		Record mongoRecord = MongoDataSource.createRecord("some-mongo-db", mongoConfig, null);
 
 		// publish "mongo-record" service
 		discovery.publish(mongoRecord, ar -> {
@@ -143,7 +152,16 @@ public class ServiceDiscoveryAllTest extends AbstractVerticle {
 
 				// Retrieve the service reference
 				ServiceReference reference = discovery.getReference(resultrecord);
+//				ServiceReference reference = discovery.getReferenceWithConfiguration(resultrecord,
+//						new JsonObject().put("username", "admin").put("password", "admin"));
 				MongoClient mongoClient = reference.get();
+
+//				mongoClient.getCollections(resultHandler -> {
+//					resultHandler.result().forEach(action -> {
+//						System.out.println("action is ::" + action);
+//					});
+//				});
+
 			} else {
 				System.out.println("Mongo record Not Found");
 			}
