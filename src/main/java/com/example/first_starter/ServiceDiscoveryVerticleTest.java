@@ -21,8 +21,8 @@ public class ServiceDiscoveryVerticleTest extends AbstractVerticle {
 				new ServiceDiscoveryOptions().setAnnounceAddress("service-announce").setName("my-name"));
 
 		// creating http endpoint record
-		Record httpEndpointRecord = HttpEndpoint.createRecord("some-rest-api", "localhost", 8099,
-				"/enum/threshold/getAll");
+		Record httpEndpointRecord = HttpEndpoint.createRecord("some-rest-api", "localhost", 8888,
+				"/");
 
 		// publishing http endpoint record
 		discovery.publish(httpEndpointRecord, asyncResult -> {
@@ -50,19 +50,19 @@ public class ServiceDiscoveryVerticleTest extends AbstractVerticle {
 //					});
 //				});
 
-				HttpRequest<Buffer> webClientBuffer = webClient.get("/enum/threshold/getAll");
+				HttpRequest<Buffer> webClientBuffer = webClient.get("/");
 				System.out.println("Buffer is :: " + webClientBuffer);
 				webClientBuffer.send(asyncResult2 -> {
 					if (asyncResult2.succeeded()) {
-						System.out.println("AsString "+ asyncResult2.result().bodyAsString());
+						System.out.println("AsString " + asyncResult2.result().bodyAsString());
 					} else {
 						asyncResult2.cause().printStackTrace();
 					}
 				});
-				
-				webClientBuffer.send(asyncResult3 -> {
-					System.out.println("JsonObject " + asyncResult3.result().bodyAsJsonObject());
-				});
+
+//				webClientBuffer.send(asyncResult3 -> {
+//					System.out.println("JsonObject " + asyncResult3.result().bodyAsJsonObject());
+//				});
 
 			} else {
 				System.out.println("Didn't got Record");

@@ -7,7 +7,9 @@ public class MainClass {
 	public static void main(String[] args) {
 		Vertx vertx = Vertx.vertx();
 //		vertx.deployVerticle(MainVerticle.class.getName());
-		vertx.deployVerticle(ServiceDiscoveryVerticleTest.class.getName());
+//		vertx.deployVerticle(ServiceDiscoveryVerticleTest.class.getName());
+		//MongoClientTest
+//		vertx.deployVerticle(MongoClientTest.class.getName());
 	}
 
 }
