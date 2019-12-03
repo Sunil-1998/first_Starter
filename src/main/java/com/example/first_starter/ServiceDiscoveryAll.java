@@ -15,7 +15,7 @@ import io.vertx.servicediscovery.ServiceReference;
 import io.vertx.servicediscovery.types.HttpEndpoint;
 import io.vertx.servicediscovery.types.MongoDataSource;
 
-public class ServiceDiscoveryAllTest extends AbstractVerticle {
+public class ServiceDiscoveryAll extends AbstractVerticle {
 
 	@Override
 	public void start() {

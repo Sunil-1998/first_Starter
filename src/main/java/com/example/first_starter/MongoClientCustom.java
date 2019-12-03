@@ -4,7 +4,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.MongoClient;
 
-public class MongoClientTest extends AbstractVerticle {
+public class MongoClientCustom extends AbstractVerticle {
 
 	/**
 	 * public class Demo { String name; String value;

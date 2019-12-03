@@ -11,7 +11,7 @@ import io.vertx.servicediscovery.ServiceDiscoveryOptions;
 import io.vertx.servicediscovery.ServiceReference;
 import io.vertx.servicediscovery.types.HttpEndpoint;
 
-public class ServiceDiscoveryVerticleTest extends AbstractVerticle {
+public class ServiceDiscoveryVerticle extends AbstractVerticle {
 
 	@Override
 	public void start() {
