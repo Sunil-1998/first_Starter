@@ -6,10 +6,12 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		Vertx vertx = Vertx.vertx();
-//		vertx.deployVerticle(MainVerticle.class.getName());
+		vertx.deployVerticle(MainVerticle.class.getName());
 //		vertx.deployVerticle(ServiceDiscoveryVerticleTest.class.getName());
 		//MongoClientTest
 //		vertx.deployVerticle(MongoClientTest.class.getName());
+		//ServiceDiscoveryAllTest
+		vertx.deployVerticle(ServiceDiscoveryAllTest.class.getName());
 	}
 
 }
